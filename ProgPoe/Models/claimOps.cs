@@ -142,16 +142,9 @@ namespace ProgPoe.Models
 
         public async Task<bool> SaveClaimAndDocument(IFormFile document)
         {
-            // Save the claim to the database and get the claimID
             int claimID = SaveClaimToDatabase();
-
-            // Upload the document to Azure File Share and get the URL
             string uploadURL = await UploadDocumentToAzureFileShare(document, claimID);
-
-            // Save the document details to the database and get the documentID
             int documentID = SaveDocumentDetailsToDatabase(LecturerID, uploadURL);
-
-            // Update the claim with the documentID
             bool updateSuccess = UpdateClaimWithDocumentID(claimID, documentID);
             return updateSuccess;
         }
