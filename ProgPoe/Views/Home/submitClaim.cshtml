@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Claim - Contract Monthly Claim System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .claim-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #333;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"], input[type="number"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="claim-container">
+        <h2>Submit Your Claim</h2>
+        <form action="/submit_claim" method="post" enctype="multipart/form-data">
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
+
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname" name="lastname" placeholder="Enter your last name" required>
+
+            <label for="hoursworked">Hours Worked</label>
+            <input type="number" id="hoursworked" name="hoursworked" placeholder="Enter hours worked" required>
+
+            <label for="university">University Name</label>
+            <input type="text" id="university" name="university" placeholder="Enter your university name" required>
+
+            <label for="document">Supporting Document (PDF)</label>
+            <input type="file" id="document" name="document" accept=".pdf" required>
+
+            <input type="submit" value="Submit Claim">
+        </form>
+    </div>
+
+</body>
+</html>

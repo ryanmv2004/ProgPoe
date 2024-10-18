@@ -1,0 +1,152 @@
+﻿@model List<ProgPoe.Models.dClaim>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claims List - Contract Monthly Claim System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .btn-accept {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-accept:hover {
+            background-color: #45a049;
+        }
+
+        .btn-reject {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .btn-reject:hover {
+            background-color: #e53935;
+        }
+
+        .comment-box {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .action-cell {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .action-buttons {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Claims List</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Hours Worked</th>
+                <th>Document</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var claim in Model)
+                {
+                    <tr>
+                        <td>@claim.FirstName</td>
+                        <td>@claim.LastName</td>
+                        <td>@claim.HoursWorked</td>
+                        <td><a href="@claim.DocumentURL" target="_blank">View Document</a></td>
+                        <td>@claim.Status</td>
+                        <td class="action-cell">
+                            <form asp-action="UpdateClaimStatus" method="post">
+                                <div class="action-buttons">
+                                    <button type="submit" name="action" value="approve" class="btn btn-accept">Approve</button>
+                                    <button type="submit" name="action" value="deny" class="btn btn-reject">Deny</button>
+                                </div>
+                                <input type="hidden" name="claimID" value="@claim.ClaimID" />
+                                <input type="text" name="comment" class="comment-box" placeholder="Add a comment">
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">No claims found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+</html>

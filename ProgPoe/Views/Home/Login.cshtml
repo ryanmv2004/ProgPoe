@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 5px;
+            margin-top: 100px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+            input[type="submit"]:hover {
+                background-color: #45a049;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form asp-controller="Login" asp-action="login" method="post">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Login">
+            <p class="signpp">Don't have an account ? <a href="@Url.Action("signUp","Home")">Sign Up</a> </p>
+            <p class="signpp">Want to Login as an Admin? <a href="@Url.Action("adminLogin","Home")">Admin Login</a> </p>
+
+        </form>
+    </div>
+
+    <script>
+        var message = '@TempData["AlertMessage"]';
+        if (message) {
+            alert(message);
+        }
+    </script>
+
+</body>
+</html>
