@@ -3,7 +3,7 @@ using ProgPoe.Models;
 
 namespace ProgPoe.Controllers
 {
-    public class claimController1 : Controller
+    public class claimController : Controller
     {
         [HttpGet]
         [Route("display_claims")]
