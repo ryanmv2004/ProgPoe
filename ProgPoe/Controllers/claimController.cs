@@ -9,6 +9,7 @@ namespace ProgPoe.Controllers
         [HttpGet]
         public IActionResult DisplayClaims()
         {
+
             claimOps claimOpsInstance = new claimOps();
             List<dClaim> claims = claimOpsInstance.GetClaimsFromDatabase();
             return View("~/Views/Home/displayClaim.cshtml", claims);
