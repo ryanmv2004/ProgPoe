@@ -40,12 +40,12 @@ namespace ProgPoe.Controllers
 
         public IActionResult displayClaim()
         {
-            return RedirectToAction("DisplayClaims", "claimController1");
+            return RedirectToAction("DisplayClaims", "claimController");
         }
 
         public IActionResult approveClaims()
         {
-            return RedirectToAction("ApproveClaims", "Admin");
+            return RedirectToAction("ApproveClaims", "Admin"f);
         }
 
         public IActionResult submitClaim()
