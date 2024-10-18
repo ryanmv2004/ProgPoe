@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProgPoe.Models;
+using System.Collections.Generic;
 
 namespace ProgPoe.Controllers
 {
-    public class claimController : Controller
+    public class ClaimController : Controller
     {
         [HttpGet]
-        [Route("display_claims")]
         public IActionResult DisplayClaims()
         {
             claimOps claimOpsInstance = new claimOps();
