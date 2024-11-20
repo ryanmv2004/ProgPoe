@@ -1,0 +1,113 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .user-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+            .user-container h3 {
+                margin-top: 0;
+            }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 8px;
+                box-sizing: border-box;
+            }
+
+        .save-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+            .save-btn:hover {
+                background-color: #45a049;
+            }
+    </style>
+</head>
+<body>
+    <h1>User Management</h1>
+
+    <!-- Example User 1 -->
+    <div class="user-container">
+        <h3>User 1</h3>
+        <form id="user1Form">
+            <div class="form-group">
+                <label for="user1FirstName">First Name:</label>
+                <input type="text" id="user1FirstName" name="firstName" value="John">
+            </div>
+            <div class="form-group">
+                <label for="user1LastName">Last Name:</label>
+                <input type="text" id="user1LastName" name="lastName" value="Doe">
+            </div>
+            <div class="form-group">
+                <label for="user1Email">Email:</label>
+                <input type="email" id="user1Email" name="email" value="john.doe@example.com">
+            </div>
+            <div class="form-group">
+                <label for="user1Password">Password:</label>
+                <input type="text" id="user1Password" name="password" value="password123">
+            </div>
+            <div class="form-group">
+                <label for="user1UniName">University Name:</label>
+                <input type="text" id="user1UniName" name="uniName" value="University of Example">
+            </div>
+            <button type="button" class="save-btn" onclick="saveUser('user1Form')">Save</button>
+        </form>
+    </div>
+
+    <!-- Example User 2 -->
+    <div class="user-container">
+        <h3>User 2</h3>
+        <form id="user2Form">
+            <div class="form-group">
+                <label for="user2FirstName">First Name:</label>
+                <input type="text" id="user2FirstName" name="firstName" value="Jane">
+            </div>
+            <div class="form-group">
+                <label for="user2LastName">Last Name:</label>
+                <input type="text" id="user2LastName" name="lastName" value="Smith">
+            </div>
+            <div class="form-group">
+                <label for="user2Email">Email:</label>
+                <input type="email" id="user2Email" name="email" value="jane.smith@example.com">
+            </div>
+            <div class="form-group">
+                <label for="user2Password">Password:</label>
+                <input type="text" id="user2Password" name="password" value="securepassword">
+            </div>
+            <div class="form-group">
+                <label for="user2UniName">University Name:</label>
+                <input type="text" id="user2UniName" name="uniName" value="Example State University">
+            </div>
+            <button type="button" class="save-btn" onclick="saveUser('user2Form')">Save</button>
+        </form>
+    </div>
