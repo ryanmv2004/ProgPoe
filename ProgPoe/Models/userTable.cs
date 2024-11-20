@@ -121,12 +121,38 @@ namespace ProgPoe.Models
                     lecturer.firstName = rdr["firstName"].ToString();
                     lecturer.lastName = rdr["lastName"].ToString();
                     lecturer.email = rdr["email"].ToString();
+                    lecturer.password = rdr["password"].ToString();
                     lecturer.uniName = rdr["uniName"].ToString();
                     lecturerList.Add(lecturer);
                 }
                 con.Close();
             }
             return lecturerList;
+        }
+
+        public int UpdateLecturer(dLecturer lecturer)
+        {
+            try
+            {
+                string sql = "UPDATE Lecturers SET firstName = @firstName, lastName = @lastName, password = @password, uniName = @uniName WHERE email = @Email";
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                cmd.Parameters.AddWithValue("@firstName", lecturer.firstName);
+                cmd.Parameters.AddWithValue("@lastName", lecturer.lastName);
+                cmd.Parameters.AddWithValue("@password", lecturer.password);
+                cmd.Parameters.AddWithValue("@uniName", lecturer.uniName);
+                cmd.Parameters.AddWithValue("@Email", lecturer.email);
+
+                con.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                con.Close();
+                return rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return -1;
+            }
         }
 
     }
