@@ -21,10 +21,15 @@ namespace ProgPoe.Controllers
             {
                 return RedirectToAction("Login", "login");
             }
+            String approved = "";
 
-            if (hoursworked < ) 
+            if (hoursworked < 50 && hourlyrate < 50)
             {
-                
+                approved = "Approved";
+            }
+            else 
+            {
+                approved = "Pending";
             }
 
             // Create a new claimOps instance and set properties
@@ -33,7 +38,7 @@ namespace ProgPoe.Controllers
                 LecturerID = userID.Value,
                 HoursWorked = hoursworked,
                 HourlyRate = hourlyrate,
-                ClaimStatus = "Pending",
+                ClaimStatus = approved,
                 UniName = university
             };
 
