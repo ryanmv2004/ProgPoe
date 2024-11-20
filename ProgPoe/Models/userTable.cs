@@ -9,7 +9,6 @@ namespace ProgPoe.Models
         public String lastName { get; set; }
         public string email { get; set; }
         public string password { get; set; }
-
         public string uniName { get; set; }
 
         public static string connectionString = "Server=tcp:progpoeserver.database.windows.net,1433;Initial Catalog=progpoedatabase;Persist Security Info=False;User ID=ryanv2004;Password=AceVents12!@;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
@@ -106,5 +105,29 @@ namespace ProgPoe.Models
                 return -1;
             }
         }
+
+        public List<dLecturer> getLecturerList() 
+        {
+            List<dLecturer> lecturerList = new List<dLecturer>();
+            using (con)
+            {
+                string sql = "SELECT * FROM Lecturers";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    dLecturer lecturer = new dLecturer();
+                    lecturer.firstName = rdr["firstName"].ToString();
+                    lecturer.lastName = rdr["lastName"].ToString();
+                    lecturer.email = rdr["email"].ToString();
+                    lecturer.uniName = rdr["uniName"].ToString();
+                    lecturerList.Add(lecturer);
+                }
+                con.Close();
+            }
+            return lecturerList;
+        }
+
     }
 }

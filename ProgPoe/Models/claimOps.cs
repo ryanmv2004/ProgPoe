@@ -83,34 +83,34 @@ namespace ProgPoe.Models
         }
 
         public int SaveDocumentDetailsToDatabase(int lecturerID, string uploadURL)
+{
+    try
+    {
+        string sql = "INSERT INTO UserDocuments (lecturerID, uploadURL) OUTPUT INSERTED.documentID VALUES (@lecturerID, @uploadURL)";
+        using (SqlConnection con = new SqlConnection(connectionString))
         {
-            try
-            {
-                string sql = "INSERT INTO UserDocuments (lecturerID, uploadURL) OUTPUT INSERTED.documentID VALUES (@lecturerID, @uploadURL)";
-                using (SqlConnection con = new SqlConnection(connectionString))
-                {
-                    SqlCommand cmd = new SqlCommand(sql, con);
-                    cmd.Parameters.AddWithValue("@lecturerID", lecturerID);
-                    cmd.Parameters.AddWithValue("@uploadURL", uploadURL);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddWithValue("@lecturerID", lecturerID);
+            cmd.Parameters.AddWithValue("@uploadURL", uploadURL);
 
-                    con.Open();
-                    int documentID = (int)cmd.ExecuteScalar();
-                    con.Close();
+            con.Open();
+            int documentID = (int)cmd.ExecuteScalar();
+            con.Close();
 
-                    return documentID;
-                }
-            }
-            catch (SqlException ex)
-            {
-                Console.WriteLine($"SQL Error: {ex.Message}");
-                return -1;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"General Error: {ex.Message}");
-                return -1;
-            }
+            return documentID;
         }
+    }
+    catch (SqlException ex)
+    {
+        Console.WriteLine($"SQL Error: {ex.Message}");
+        return -1;
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"General Error: {ex.Message}");
+        return -1;
+    }
+}
 
 
         public bool UpdateClaimWithDocumentID(int claimID, int documentID)
