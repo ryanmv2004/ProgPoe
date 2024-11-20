@@ -9,9 +9,17 @@ namespace ProgPoe.Controllers
         [HttpGet]
         public IActionResult displayLecturers()
         {
-            userTable userTableInstance = new userTable();
-            List<dLecturer> lec = userTableInstance.getLecturerList();
-            return View("~/Views/Home/HRview.cshtml", lec);
+            var adminID = HttpContext.Session.GetInt32("adminID");
+            if (adminID.HasValue)
+            {
+                userTable userTableInstance = new userTable();
+                List<dLecturer> lec = userTableInstance.getLecturerList();
+                return View("~/Views/Home/HRview.cshtml", lec);
+            }
+            else
+            {
+                return RedirectToAction("accessDenied", "Home");
+            }
         }
 
         [HttpPost]
