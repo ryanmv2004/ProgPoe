@@ -52,6 +52,10 @@ namespace ProgPoe.Controllers
             return View();
         }
 
+        public IActionResult HRview() 
+        {
+            return RedirectToAction("displayLecturers", "HR");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
