@@ -95,7 +95,7 @@ namespace ProgPoe.Models
                 cmd.Parameters.AddWithValue("@uploadURL", uploadURL);
 
                 con.Open();
-                int documentID = (int)cmd.ExecuteScalar();
+                 int documentID = (int)cmd.ExecuteScalar();
                 con.Close();
 
                 return documentID;
@@ -146,6 +146,7 @@ namespace ProgPoe.Models
             string uploadURL = await UploadDocumentToAzureFileShare(document, claimID);
             int documentID = SaveDocumentDetailsToDatabase(LecturerID, uploadURL);
             bool updateSuccess = UpdateClaimWithDocumentID(claimID, documentID);
+            bool payout = automatePayout(claimID);
             return updateSuccess;
         }
 
@@ -290,6 +291,31 @@ namespace ProgPoe.Models
             }
         }
 
+        public bool automatePayout(int claimID)
+        {
+            try
+            {
+                string sql = "UPDATE Claims SET automatedPayoutAmount = hoursWorked * hourlyRate WHERE claimID = @claimID";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@claimID", claimID);
+
+                con.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                con.Close();
+
+                return rowsAffected > 0;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"SQL Error: {ex.Message}");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"General Error: {ex.Message}");
+                return false;
+            }
+        }
 
     }
 }

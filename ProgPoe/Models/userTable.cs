@@ -12,7 +12,7 @@ namespace ProgPoe.Models
 
         public string uniName { get; set; }
 
-        public static string connectionString = "Server=tcp:progpoeserver.database.windows.net,1433;Initial Catalog = progpoedatabase; Persist Security Info=False;User ID = ryanv2004; Password=AceVents12!@; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
+        public static string connectionString = "Server=tcp:progpoeserver.database.windows.net,1433;Initial Catalog=progpoedatabase;Persist Security Info=False;User ID=ryanv2004;Password=AceVents12!@;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public static SqlConnection con = new SqlConnection(connectionString);
 
         public int insert_User(userTable m)
@@ -51,6 +51,8 @@ namespace ProgPoe.Models
 
                 con.Open();
                 object result = cmd.ExecuteScalar();
+                con.Close();
+
                 if (result != null && result != DBNull.Value)
                 {
                     userID = Convert.ToInt32(result);
@@ -71,6 +73,8 @@ namespace ProgPoe.Models
 
                 con.Open();
                 object result = cmd.ExecuteScalar();
+                con.Close();
+
                 if (result != null && result != DBNull.Value)
                 {
                     userID = Convert.ToInt32(result);

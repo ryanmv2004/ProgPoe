@@ -8,7 +8,7 @@ namespace ProgPoe.Controllers
     {
         [HttpPost]
         [Route("submit_claim")]
-        public async Task<IActionResult> submitClaim(IFormFile document, string firstname, string lastname, int hoursworked, string university)
+        public async Task<IActionResult> submitClaim(IFormFile document, string firstname, string lastname, int hoursworked, int hourlyrate, string university)
         {
             if (document == null || document.Length == 0)
             {
@@ -22,12 +22,17 @@ namespace ProgPoe.Controllers
                 return RedirectToAction("Login", "login");
             }
 
+            if (hoursworked < ) 
+            {
+                
+            }
+
             // Create a new claimOps instance and set properties
             var claim = new claimOps
             {
                 LecturerID = userID.Value,
                 HoursWorked = hoursworked,
-                HourlyRate = 50,
+                HourlyRate = hourlyrate,
                 ClaimStatus = "Pending",
                 UniName = university
             };
