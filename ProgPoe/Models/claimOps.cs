@@ -84,21 +84,21 @@ namespace ProgPoe.Models
 
         public int SaveDocumentDetailsToDatabase(int lecturerID, string uploadURL)
         {
-
             try
             {
+                string sql = "INSERT INTO UserDocuments (lecturerID, uploadURL) OUTPUT INSERTED.documentID VALUES (@lecturerID, @uploadURL)";
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand(sql, con);
+                    cmd.Parameters.AddWithValue("@lecturerID", lecturerID);
+                    cmd.Parameters.AddWithValue("@uploadURL", uploadURL);
 
-                string sql = "INSERT INTO UserDocuments (lecturerID, uploadURL) VALUES (@lecturerID, @uploadURL)";
-                SqlCommand cmd = new SqlCommand(sql, con);
+                    con.Open();
+                    int documentID = (int)cmd.ExecuteScalar();
+                    con.Close();
 
-                cmd.Parameters.AddWithValue("@lecturerID", lecturerID);
-                cmd.Parameters.AddWithValue("@uploadURL", uploadURL);
-
-                con.Open();
-                 int documentID = (int)cmd.ExecuteScalar();
-                con.Close();
-
-                return documentID;
+                    return documentID;
+                }
             }
             catch (SqlException ex)
             {
@@ -111,6 +111,7 @@ namespace ProgPoe.Models
                 return -1;
             }
         }
+
 
         public bool UpdateClaimWithDocumentID(int claimID, int documentID)
         {
