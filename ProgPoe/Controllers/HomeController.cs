@@ -47,6 +47,11 @@ namespace ProgPoe.Controllers
             return View();
         }
 
+        public IActionResult approveClaims()
+        {
+            return RedirectToAction("ApproveClaims", "admin");
+        }
+
         public IActionResult accessDenied()
         {
             return View();
